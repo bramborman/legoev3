@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>3d55e59f-c5e1-473f-abfd-36e8b0ddab81</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>Lego.Ev3.Android</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)BluetoothCommunication.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\Brick.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\BrickButtons.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\BrickChangedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\Command.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\DataReceivedEventArgs.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\DirectCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\DummyCommunication.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\Enums.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\ICommunication.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\Port.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\Response.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\ResponseManager.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Core\SystemCommand.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)NetworkCommunication.cs" />
+  </ItemGroup>
+</Project>
