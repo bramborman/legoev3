@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Android.Bluetooth;
@@ -13,18 +12,14 @@ namespace Lego.Ev3.Android
 	{
 		public event EventHandler<ReportReceivedEventArgs> ReportReceived;
 
-		private readonly string _deviceName = "EV3";
-		private BluetoothSocket _socket;
+        private readonly BluetoothDevice _bluetoothDevice;
+        private BluetoothSocket _socket;
 		private CancellationTokenSource _tokenSource;
 		private readonly byte[] _sizeBuffer = new byte[2];
 
-		public BluetoothCommunication()
+        public BluetoothCommunication(BluetoothDevice bluetoothDevice)
 		{
-		}
-
-		public BluetoothCommunication(string deviceName)
-		{
-			_deviceName = deviceName;
+            _bluetoothDevice = bluetoothDevice;
 		}
 
 		/// <summary>
@@ -32,18 +27,7 @@ namespace Lego.Ev3.Android
 		/// </summary>
 		public async Task ConnectAsync()
 		{
-			BluetoothAdapter adapter = BluetoothAdapter.DefaultAdapter;
-			if(adapter == null)
-				throw new Exception("No Bluetooth adapter found");
-
-			if(!adapter.IsEnabled)
-				throw new Exception("Bluetooth adapter is not enabled");
-
-			BluetoothDevice device = (from bd in adapter.BondedDevices where bd.Name == _deviceName select bd).FirstOrDefault();
-			if(device == null)
-				throw new Exception("LEGO EV3 brick named '" + _deviceName + "' not found.");
-
-			_socket = device.CreateRfcommSocketToServiceRecord(UUID.FromString("00001101-0000-1000-8000-00805f9b34fb"));
+			_socket = _bluetoothDevice.CreateRfcommSocketToServiceRecord(UUID.FromString("00001101-0000-1000-8000-00805f9b34fb"));
 			await _socket.ConnectAsync();
 
 			_tokenSource = new CancellationTokenSource();
